@@ -1,0 +1,2 @@
+sample,bundle,image,alignment,keypoints,annotation,reference_alignment
+rcc_kidney,/data/Xenium_V1_Human_Kidney_FFPE_Protein_updated_outs.zip,/data/he_image.ome.tif,/data/alignment_files/matrix.csv,/data/alignment_files/keypoints.csv,/data/annotation.geojson,/data/he_imagealignment.csv

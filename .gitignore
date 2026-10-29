@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.egg-info/
+.nextflow*
+work/
+results*/
+tests/data/
+.DS_Store
+.pytest_cache/

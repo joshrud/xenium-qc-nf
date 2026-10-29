@@ -1,0 +1,89 @@
+# Default marker configuration. Genes/channels missing from a given panel are skipped automatically.
+# Copy this file and pass it with --markers to adapt the pipeline to another tissue or panel.
+
+# Broad cell types for cluster labelling (cluster label = highest mean marker score).
+cell_types:
+  Epithelial / tumor: [EPCAM, KRT8, KRT18, KRT19, CDH1, CD70]
+  Plasma: [MZB1, TENT5C, TNFRSF17, DERL3, FKBP11, JCHAIN]
+  B: [MS4A1, BANK1, CD19, TCL1A, CD79A]
+  CD8 T: [CD8A, CD3E, CD3D, GZMK]
+  CD4 T / Treg: [CD4, CD3E, IL7R, FOXP3, CTLA4]
+  NK: [KLRD1, GNLY, NKG7, PRF1]
+  Macrophage: [CD68, CD163, MRC1, AIF1, MPEG1, C1QA]
+  Dendritic: [ITGAX, CD1C, LAMP3, CLEC10A, CCR7]
+  Endothelial: [PECAM1, VWF, CD34, CLEC14A, EGFL7]
+  Fibroblast: [PDGFRA, DPT, C7, FBLN1, COL1A1]
+  SMC / pericyte: [ACTA2, MYH11, DES, CNN1, PDGFRB]
+  Mast: [CPA3, MS4A2, KIT]
+
+# Segmentation spillover: gene pairs that should not co-occur in one cell (A-high cells, leak of B).
+spillover_exclusive:
+  - [KRT8, PTPRC]
+  - [PECAM1, PTPRC]
+  - [ACTA2, PTPRC]
+  - [MS4A1, CD3E]
+  - [CD3E, CD68]
+# Pairs that should co-occur (sets the expected leak ceiling).
+spillover_positive:
+  - [CD3E, PTPRC]
+
+# Protein feature -> RNA gene, for RNA/protein concordance (Xenium Protein runs only).
+protein_gene_pairs:
+  CD3E: CD3E
+  CD8A: CD8A
+  CD4: CD4
+  CD20: MS4A1
+  CD68: CD68
+  CD163: CD163
+  CD138: SDC1
+  CD31: PECAM1
+  CD45: PTPRC
+  PD-1: PDCD1
+  PD-L1: CD274
+  LAG-3: LAG3
+  GranzymeB: GZMB
+  Ki-67: MKI67
+  CD11c: ITGAX
+  HLA-DR: HLA-DRA
+  E-Cadherin: CDH1
+  Vimentin: VIM
+  alphaSMA: ACTA2
+  CD16: FCGR3A
+  VISTA: VSIR
+  PCNA: PCNA
+  PTEN: PTEN
+  Beta-catenin: CTNNB1
+
+# Protein pairs that should not be high in the same cell.
+protein_exclusive:
+  - [PanCK, CD45]
+  - [CD3E, CD20]
+  - [CD8A, CD4]
+  - [CD31, CD45]
+  - [CD20, CD68]
+
+# Marker gene -> morphology_focus channel name, for "do RNA spots land on their stain?".
+image_pairs:
+  - [MS4A1, CD20]
+  - [CD3E, CD3E]
+  - [CD8A, CD8A]
+  - [CD68, CD68]
+  - [CD163, CD163]
+  - [PECAM1, CD31]
+  - [PTPRC, CD45]
+  - [ACTA2, alphaSMA]
+  - [MZB1, CD138]
+  - [KRT8, PanCK]
+  - [VIM, Vimentin]
+  - [CDH1, E-Cadherin]
+
+# Morphology crops: title, gene(s), channel shown under the transcripts (DAPI if missing).
+morphology_crops:
+  - {title: "B cells / TLS", genes: [MS4A1], channel: CD20}
+  - {title: "T cells", genes: [CD3E], channel: CD3E}
+  - {title: "Endothelium", genes: [PECAM1], channel: CD31}
+  - {title: "Macrophages", genes: [CD68], channel: CD68}
+  - {title: "Epithelium / tumor", genes: [KRT8, KRT18], channel: PanCK}
+
+# Genes not expected in most tissues; used as a negative control for depth-bias checks between regions.
+tissue_inappropriate_genes: [GCG, INS, PPY, AMY2A, GHRL, ADIPOQ, GKN2, PVALB, SCGB2A1, AHSP, GYPA, APOA5]
